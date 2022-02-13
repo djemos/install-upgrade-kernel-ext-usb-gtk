@@ -34,7 +34,7 @@ void do_action (gboolean doit) {
 	GtkWidget *label ;		
 	gchar *commandline, **command, *output, *kernel_action_mode,*kernel_type, *fstype, *secs;
 	
-	GtkWidget *huge_kernel, *generic_kernel, *install_huge, *upgrade_huge, *install_generic, *upgrade_generic, *viewport;
+	GtkWidget *huge_kernel, *generic_kernel, *install_huge, *upgrade_huge, *install_generic, *upgrade_generic;
 	
 	huge_kernel = (GtkWidget *) gtk_builder_get_object(widgetstree, "huge_kernel");
 	install_huge = (GtkWidget *) gtk_builder_get_object(widgetstree, "install_huge");
@@ -44,13 +44,15 @@ void do_action (gboolean doit) {
 	install_generic = (GtkWidget *) gtk_builder_get_object(widgetstree, "install_generic");
 	upgrade_generic = (GtkWidget *) gtk_builder_get_object(widgetstree, "upgrade_generic");
 	
+	listwidget = (GtkComboBox *) gtk_builder_get_object(widgetstree, "filesystem");
+	gtk_combo_box_get_active_iter(listwidget, &iter);
+	list = (GtkListStore *) gtk_combo_box_get_model(listwidget);
 	gtk_tree_model_get((GtkTreeModel *) list, &iter, 0, &fstype, -1);
-		if (strlen(fstype) == 0) {
-			g_free(fstype);
-			fstype = g_strdup("ext4");
-		}		
+	if (strlen(fstype) == 0) {
+		g_free(fstype);
+		fstype = g_strdup("ext4");
+	}	
 		
-		if (gtk_toggle_button_get_active((GtkToggleButton*) gtk_builder_get_object(widgetstree, "secs"))) {
 		listwidget = (GtkComboBox *) gtk_builder_get_object(widgetstree, "secs");
 		gtk_combo_box_get_active_iter(listwidget, &iter);
 		list = (GtkListStore *) gtk_combo_box_get_model(listwidget);
@@ -59,7 +61,7 @@ void do_action (gboolean doit) {
 			g_free(secs);
 			secs = g_strdup("10");
 			}
-		}		
+	
 	   
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (huge_kernel))) {
 		kernel_type = g_strdup ("huge") ;
@@ -97,7 +99,7 @@ void do_action (gboolean doit) {
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "generic_kernel"), FALSE);
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "install_generic"), FALSE);
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "upgrade_generic"), FALSE);
-		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "fstype"), FALSE);
+		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "filesystem"), FALSE);
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "secs"), FALSE);
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "ok"), FALSE);
 		gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "cancel_btn"), TRUE);
@@ -136,7 +138,7 @@ void on_process_end (GPid thepid, gint status, gpointer data) {
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "install_generic"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "upgrade_generic"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "ok"), TRUE);
-	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "fstype"), TRUE);
+	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "filesystem"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "secs"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "cancel_btn"), FALSE);
 	
