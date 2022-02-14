@@ -128,8 +128,6 @@ void on_process_end (GPid thepid, gint status, gpointer data) {
 	GtkWidget *dialog;
 
 	pid = 0;
-	//g_free(location);
-	//location = NULL;
 	
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "huge_kernel"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "install_huge"), TRUE);
