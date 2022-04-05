@@ -16,8 +16,7 @@ tar -cvjSf install-upgrade-kernel-ext-usb-gtk.tar.bz2 install-upgrade-kernel-ext
 
 fakeroot slkbuild -X
 
-To install the package type: 
-
+To install the package type:
 for 64bit:
 sudo spkg install-upgrade-kernel-ext-usb-gtk-2.0-x86_64-1dj.txz
 
