@@ -44,6 +44,10 @@ void do_action (gboolean doit) {
 	install_generic = (GtkWidget *) gtk_builder_get_object(widgetstree, "install_generic");
 	upgrade_generic = (GtkWidget *) gtk_builder_get_object(widgetstree, "upgrade_generic");
 	
+	fullpercent = FALSE;
+	pulsebar = TRUE;
+	progressbar_handler_id = g_timeout_add(100, progressbar_handler, NULL);
+	
 	listwidget = (GtkComboBox *) gtk_builder_get_object(widgetstree, "filesystem");
 	gtk_combo_box_get_active_iter(listwidget, &iter);
 	list = (GtkListStore *) gtk_combo_box_get_model(listwidget);
@@ -126,8 +130,11 @@ void on_exitp (GtkWidget *widget, gpointer user_data) {
 
 void on_process_end (GPid thepid, gint status, gpointer data) {
 	GtkWidget *dialog;
-
+	GtkProgressBar *progressbar;
+	gdouble progressfraction;
+	gchar *s_progressfraction;
 	pid = 0;
+
 	
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "huge_kernel"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "install_huge"), TRUE);
@@ -147,6 +154,34 @@ void on_process_end (GPid thepid, gint status, gpointer data) {
 	}
 	
 	gtk_widget_show(dialog);
+}
+
+gboolean progressbar_handler(gpointer data) {
+	GtkProgressBar *progressbar;
+	gchar *output;
+	gdouble progressfraction;
+	gchar *s_progressfraction;
+	
+	progressbar = (GtkProgressBar *) gtk_builder_get_object(widgetstree,"progressbar");
+
+	if (pulsebar) {
+		gtk_progress_bar_pulse(progressbar);
+	} else {
+		if (progressfraction >= 100) {
+			gtk_progress_bar_set_text(progressbar, "100 %");
+			gtk_progress_bar_set_fraction(progressbar, 1.0);
+			fullpercent = TRUE;
+			pulsebar = TRUE;
+			g_source_remove(progressbar_handler_id);
+			progressbar_handler_id = g_timeout_add(100, progressbar_handler, NULL);
+		} else {
+			gtk_progress_bar_set_fraction(progressbar, progressfraction / 100);
+			s_progressfraction = g_strdup_printf("%2.0f %c", progressfraction, '%');
+			gtk_progress_bar_set_text(progressbar, s_progressfraction);
+			g_free(s_progressfraction);
+		}
+	}
+	return TRUE;
 }
 
 void on_about_activate (GtkWidget *widget, gpointer user_data) {
