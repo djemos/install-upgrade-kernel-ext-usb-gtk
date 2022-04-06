@@ -25,9 +25,9 @@
 ###################################################################
 ####             install-upgrade-kernel-ext-usb                ####
 ###################################################################
-# script to install/upgrade new kernel images on slackel     	  #
+# script to install/upgrade new kernel images on slackel          #
 # on slackel installed in external usb or ssd disk                #
-# when kernel upgrade on repos				                      #
+# when kernel upgrade on repos                                    #
 # when installing/upgrading kernel an initrd is created           #
 # so slackel can boot from external usb or ssd disk               #
 # This script created for slackel/salix                           #
@@ -41,7 +41,7 @@ SCRIPT=$(readlink -f "$SCRIPT")
 VER=1.1.1
 
 init(){
-		
+
 		if [ "$UID" != "0" ]; then
 			echo "You need to be root to run this"
 			exit 1
@@ -56,7 +56,7 @@ init(){
         export TEXTDOMAIN="install-upgrade-kernel-ext-usb"
         export TEXTDOMAINDIR="/usr/share/locale"
         . gettext.sh
-        
+
         # Path needs to be extended in case you're only half a root :)
         export PATH="/usr/sbin:/sbin:${PATH}"
 }
@@ -74,7 +74,7 @@ usage(){
         echo "`eval_gettext '   /dev/sdb1   Partition, default /dev/sdb1'`"
         exit 1
 }
-  
+
 # Check which options are used from the command line
 checkoptions(){
         flag=$1
@@ -82,12 +82,12 @@ checkoptions(){
         flagw=$3
         flagf=$4
         flagd=$5
-        
+
 		if [ $# -gt 5 ] ; then
 			echo "`eval_gettext 'ERROR: Too many arguments'`"
 			usage
 		fi
-		
+
         if [[ $flag = "install" ]]; then
 			export flag="install"
         elif [[ $flag = "upgrade" ]]; then
@@ -95,7 +95,7 @@ checkoptions(){
 		else
 			usage
         fi
- 
+
         #if switch is unknown or if asking for help
 		if [[ $flagr = "help" ]] || [[ $flag = "h" ]]; then
 			usage  
@@ -105,14 +105,14 @@ checkoptions(){
 			export flagr="generic"
 		else
 			usage
-		fi		
-       
+		fi
+
        if [ -z "$flagw" ]; then
 			export WAIT=10
 	   else
 	        export WAIT=$flagw
-	   fi     		
-       
+	   fi
+
        if [ -z "$flagf" ]; then
 			export flagf="ext4"
 	   elif [ "$flagf" = "ext2" ]; then
@@ -120,23 +120,23 @@ checkoptions(){
 		elif [ "$flagf" = "ext3" ]; then
 			export flagf="ext3"
 		elif [ "$flagf" = "ext4" ]; then
-			export flagf="ext4"     
+			export flagf="ext4"
 		elif [ "$flagf" = "btrfs" ]; then
 			export flagf="btrfs"
 		elif [ "$flagf" = "jfs" ]; then
-			export flagf="jfs" 
+			export flagf="jfs"
 		elif [ "$flagf" = "reiserfs" ]; then
 			export flagf="reiserfs"
 		elif [ "$flagf" = "xfs" ]; then
-			export flagf="xfs"   
+			export flagf="xfs"
 		else
-			usage	
-		fi  		
+			usage
+		fi
 
 
 		if [ -z "$flagd" ] || [ "$flagd" == "/dev/sda1" ]; then
 			export flagd="/dev/sdb1"
-		fi	
+		fi
 
 }
 execute_script(){
@@ -165,7 +165,7 @@ elif [ "$flagr" == "huge" ]; then
 		slapt-get -i --reinstall -d kernel-headers kernel-huge kernel-modules
 	else
 		slapt-get -i --reinstall -d kernel-headers kernel-huge kernel-huge-smp kernel-modules kernel-modules-smp
-	fi 
+	fi
 fi
 
 if [ `uname -m` == "x86_64" ]; then
@@ -199,12 +199,12 @@ fi
 
 if [ -f /etc/lsb-release ]; then
 	sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='Slackel Linux $kv'/" /etc/lsb-release
-fi	
+fi
 
 if [ "$flag" == "install" ]; then
 	installpkg $packagesdirectory/*
 	kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
-	echo "creating /boot/initrd-${kv}.gz" 
+	echo "creating /boot/initrd-${kv}.gz"
 	mkinitrd -c -f $flagf -u -w $WAIT -o /boot/initrd-${kv}.gz -r $flagd -k $kv -m $moduleslist >/dev/null 2>&1
 	rm -rf /boot/initrd-tree/
 	rm /boot/vmlinuz-huge /boot/vmlinuz-huge-smp /boot/vmlinuz-generic >/dev/null 2>&1
@@ -214,7 +214,7 @@ if [ "$flag" == "install" ]; then
 elif [ "$flag" == "upgrade" ]; then
 	upgradepkg $packagesdirectory/*
 	kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
-	echo "creating /boot/initrd-${kv}.gz" 
+	echo "creating /boot/initrd-${kv}.gz"
 	rm /boot/initrd*.gz >/dev/null 2>&1
 	mkinitrd -c -f $flagf -u -w $WAIT -o /boot/initrd-${kv}.gz -r $flagd -k $kv -m $moduleslist >/dev/null 2>&1
 	rm -rf /boot/initrd-tree/
