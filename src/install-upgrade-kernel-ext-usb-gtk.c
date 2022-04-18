@@ -133,8 +133,12 @@ void on_process_end (GPid thepid, gint status, gpointer data) {
 	GtkProgressBar *progressbar;
 	gdouble progressfraction;
 	gchar *s_progressfraction;
+	
 	pid = 0;
-
+	g_source_remove(progressbar_handler_id);
+	progressbar = (GtkProgressBar *) gtk_builder_get_object(widgetstree,"progressbar");
+	gtk_progress_bar_set_fraction(progressbar, 0);
+	gtk_progress_bar_set_text(progressbar, "");
 	
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "huge_kernel"), TRUE);
 	gtk_widget_set_sensitive ((GtkWidget *) gtk_builder_get_object(widgetstree, "install_huge"), TRUE);
