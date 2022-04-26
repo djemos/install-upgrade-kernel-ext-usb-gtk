@@ -115,14 +115,28 @@ void on_ok_clicked(GtkWidget *widget, gpointer user_data) {
 	do_action(TRUE);
 }
 
+void on_dialogerror_OK_clicked(GtkWidget *widget, gpointer user_data) {
+		GtkWidget *dialog;
+		dialog = (GtkWidget *) gtk_builder_get_object(widgetstree, "dialogerror");
+		gtk_widget_hide(dialog);
+	}
+	
+void on_dialogfinished_OK_clicked(GtkWidget *widget, gpointer user_data) {
+		GtkWidget *dialog;
+		dialog = (GtkWidget *) gtk_builder_get_object(widgetstree, "dialogfinished");
+		gtk_widget_hide(dialog);
+	}
+
 ////
 void on_cancel_btn_clicked (GtkWidget *widget, gpointer user_data) {
 	kill (pid, SIGTERM);
+	system("killall slapt-get");
 }
 
 void on_exitp (GtkWidget *widget, gpointer user_data) {
 	if (pid != 0) {
 		kill (pid, SIGTERM);
+		system("killall slapt-get");
 	}
 	gtk_main_quit();
 }
@@ -198,6 +212,7 @@ void on_about_activate (GtkWidget *widget, gpointer user_data) {
 void on_quit_activate (GtkWidget *widget, gpointer user_data) {
 	if (pid != 0) {
 		kill (pid, SIGTERM);
+		system("killall slapt-get");
 	}
 	gtk_main_quit();
 }

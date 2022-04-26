@@ -23,3 +23,5 @@ for i in `ls *.po`; do
 	msgmerge -U $i install-upgrade-kernel-ext-usb-gtk.pot
 done
 rm -f ./*~
+
+
