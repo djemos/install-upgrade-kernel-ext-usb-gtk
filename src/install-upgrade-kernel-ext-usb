@@ -62,7 +62,7 @@ init(){
 }
 
 usage(){
-        echo "`eval_gettext 'USAGE: install-upgrade-kernel-ext-usb [install|upgrade] [huge|generic] [10] [ext4] [/dev/sdb1]'`"
+        echo "`eval_gettext 'USAGE: install-upgrade-kernel-ext-usb [install|upgrade] [huge|generic] [10] [ext4]'`"
         echo
         echo "`eval_gettext '   OPTIONS:'`"
         echo "`eval_gettext '   install     Install huge or generic kernel'`"
@@ -71,19 +71,23 @@ usage(){
         echo "`eval_gettext '   generic     Download generic kernel and also create an initrd'`"
         echo "`eval_gettext '   10       Time in seconds to wait for usb to add to the initrd'`"
         echo "`eval_gettext '   ext4      Filesystem of installed system, default ext4'`"
-        echo "`eval_gettext '   /dev/sdb1   Partition, default /dev/sdb1'`"
         exit 1
 }
 
 # Check which options are used from the command line
 checkoptions(){
+ROOTPART=$(lsblk -l -o name,mountpoint| grep /$|sed "s,\([^[:space:]]*\).*,/dev/\1,")
+ROOTNAME=$(echo $ROOTPART|sed "s,/dev/,,")
+ROOTUUID=$(lsblk -l -o name,uuid|grep ^$ROOTNAME|sed "s/[^ ]*[[:space:]]*//")
+export FSTYPE=$(lsblk -l -o name,fstype|grep ^$ROOTNAME|sed "s/[^ ]*[[:space:]]*//")
+ROOTDEVICE=/dev/$(lsblk -l -o name,pkname|grep ^$ROOTNAME|sed "s/[^ ]*[[:space:]]*//")
+
         flag=$1
         flagr=$2
         flagw=$3
         flagf=$4
-        flagd=$5
 
-		if [ $# -gt 5 ] ; then
+		if [ $# -gt 4 ] ; then
 			echo "`eval_gettext 'ERROR: Too many arguments'`"
 			usage
 		fi
@@ -114,7 +118,8 @@ checkoptions(){
 	   fi
 
        if [ -z "$flagf" ]; then
-			export flagf="ext4"
+			#export flagf="ext4"
+			export flagf=$FSTYPE
 	   elif [ "$flagf" = "ext2" ]; then
 			export flagf="ext2"
 		elif [ "$flagf" = "ext3" ]; then
@@ -132,23 +137,20 @@ checkoptions(){
 		else
 			usage
 		fi
-
-
-		if [ -z "$flagd" ] || [ "$flagd" == "/dev/sda1" ]; then
-			export flagd="/dev/sdb1"
-		fi
-
 }
+
 execute_script(){
 if [ -z "$startdir" ]; then
 	startdir="$(pwd)"
 	export startdir
 fi
 
+export ROOTUUID="$(findmnt -no uuid /)"
+
 #moduleslist="squashfs:overlay:loop:xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:mmc-core:mmc-block:sdhci:sdhci-pci:sdhci-acpi:usb-storage:hid:usbhid:i2c-hid:hid-generic:hid-apple:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:jbd2:mbcache:crc32c-intel:ext3:ext4:isofs:fat:nls_cp437:nls_iso8859-1:msdos:vfat:ntfs"
 #moduleslist="xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:hid:usbhid:i2c-hid:hid_generic:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:jbd2:mbcache:crc32c-intel:ext4"
-#moduleslist="loop:xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:mmc-core:mmc-block:sdhci:sdhci-pci:sdhci-acpi:usb-storage:hid:usbhid:i2c-hid:hid-generic:hid-apple:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:crc32c-intel:fuse"	
-moduleslist="loop:xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:mmc-core:mmc-block:sdhci:sdhci-pci:sdhci-acpi:usb-storage:hid:usbhid:i2c-hid:hid-generic:hid-apple:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:mptbase:mptscsih:mptspi:jbd2:mbcache:crc32c_intel:crc32c_generic:fuse:ext2:ext3:ext4:xfs:reiserfs:jfs:btrfs:isofs:fat:nls_cp437:nls_iso8859-1:msdos:vfat:ntfs"
+hugemoduleslist="loop:xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:mmc-core:mmc-block:sdhci:sdhci-pci:sdhci-acpi:usb-storage:hid:usbhid:i2c-hid:hid-generic:hid-apple:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:crc32c-intel:fuse"
+genericmoduleslist="loop:xhci-pci:ohci-pci:ehci-pci:xhci-hcd:uhci-hcd:ehci-hcd:mmc-core:mmc-block:sdhci:sdhci-pci:sdhci-acpi:usb-storage:hid:usbhid:i2c-hid:hid-generic:hid-apple:hid-asus:hid-cherry:hid-logitech:hid-logitech-dj:hid-logitech-hidpp:hid-lenovo:hid-microsoft:hid_multitouch:mptbase:mptscsih:mptspi:jbd2:mbcache:crc32c_intel:crc32c_generic:fuse:ext2:ext3:ext4:xfs:reiserfs:jfs:btrfs:isofs:fat:nls_cp437:nls_iso8859-1:msdos:vfat:ntfs"
 
 #clear
 #packages_dir contain packages.txz
@@ -183,6 +185,7 @@ if [ `uname -m` == "x86_64" ]; then
 		cd $packagesdirectory
 		f=`ls kernel-huge*.txz`
 		kv=`echo $f | cut -d'-' -f 3`
+		cd $startdir
 	elif [ "$flagr" == "generic" ]; then
 		cd $packagesdirectory
 		f=`ls kernel-generic*.txz`
@@ -215,35 +218,165 @@ if [ -f /etc/lsb-release ]; then
 	sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='Slackel Linux $kv'/" /etc/lsb-release
 fi
 
+export SLACKELVERSION="Slackel Linux"
+
 if [ "$flag" == "install" ]; then
 	installpkg $packagesdirectory/*
-	kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
-	echo "creating /boot/initrd-${kv}.gz"
-	mkinitrd -c -f $flagf -u -w $WAIT -o /boot/initrd-${kv}.gz -r $flagd -k $kv -m $moduleslist >/dev/null 2>&1
-	rm -rf /boot/initrd-tree/
+	export kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
+	(cd /boot
+	for KERNEL in `ls vmlinuz-*-*`; do
+		if echo $KERNEL | grep huge ; then
+			INITRD=initrd-huge-${kv}.gz
+			moduleslist=$hugemoduleslist
+		else
+			INITRD=initrd-generic-${kv}.gz
+			moduleslist=$genericmoduleslist
+		fi
+		echo "Creating initrd $INITRD"
+		mkinitrd -c -f $flagf -u -w $WAIT -o /boot/$INITRD -r UUID=$ROOTUUID -k $kv -m $moduleslist >/dev/null 2>&1
+		rm -rf /boot/initrd-tree/ 
+	done
+	)
 	rm /boot/vmlinuz-huge /boot/vmlinuz-huge-smp /boot/vmlinuz-generic >/dev/null 2>&1
-	if [ -f /usr/sbin/update-grub ]; then
-		echo "updating grub"
-		update-grub
-	fi 
 	rm -rf $packagesdirectory
 elif [ "$flag" == "upgrade" ]; then
 	upgradepkg $packagesdirectory/*
-	kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
-	echo "creating /boot/initrd-${kv}.gz"
-	rm /boot/initrd*.gz >/dev/null 2>&1
-	mkinitrd -c -f $flagf -u -w $WAIT -o /boot/initrd-${kv}.gz -r $flagd -k $kv -m $moduleslist >/dev/null 2>&1
-	rm -rf /boot/initrd-tree/
+	export kv=`ls -l /boot/vmlinuz | cut -f2 -d'>' | sed s/^[^0-9]*//`
+	(cd /boot
+	for KERNEL in `ls vmlinuz-*-*`; do
+		if echo $KERNEL | grep huge ; then
+			INITRD=initrd-huge-${kv}.gz
+			moduleslist=$hugemoduleslist
+		else
+			INITRD=initrd-generic-${kv}.gz
+			moduleslist=$genericmoduleslist
+		fi
+		echo "Creating initrd $INITRD"
+		mkinitrd -c -f $flagf -u -w $WAIT -o /boot/$INITRD -r UUID=$ROOTUUID -k $kv -m $moduleslist >/dev/null 2>&1
+		rm -rf /boot/initrd-tree/ 
+	done
+	)
 	rm /boot/vmlinuz-huge /boot/vmlinuz-huge-smp /boot/vmlinuz-generic >/dev/null 2>&1
-	
-	if [ -f /usr/sbin/update-grub ]; then
-		echo "updating grub"
-		update-grub
-	fi 
 	rm -rf $packagesdirectory
 fi
+}
+
+UUIDify(){
+#!/bin/sh
+#
+#   UUIDify (Version 1.0):
+#
+#     UUIDify /etc/fstab entries.  Output will be written to stdout.
+#
+#
+#   Important note:
+#
+#     Make sure you review the output of this script before applying
+#     it to your /etc/fstab. Blindly running: UUIDify.sh >/etc/fstab
+#     would be a mistake!
+#
+
+file=${1:-/etc/fstab}
+
+if [ "$file" != "-" ] && [ -r "$file" ]; then
+    exec < "$file"
+else
+    echo "Could not read input file: $file" 1>&2
+    exit 1
+fi
+
+if [ ! -r /run/blkid/blkid.tab ]; then
+    if [ "$( id -u )" -eq 0 ]; then
+	/sbin/blkid >/dev/null || exit 1
+    else
+	echo 'UUIDify requires a blkid cache file when run by a non-superuser id.' 1>&2
+	echo 'Please run blkid as root user and re-run.' 1>&2
+	exit 1
+    fi
+fi
+
+while read fs_spec rest
+do
+    case "$fs_spec" in
+	/dev/sd*|/dev/nvme*) uuid_spec=$( /sbin/blkid -s UUID "$fs_spec" )
+		 uuid_spec=${uuid_spec#*: }
+		 uuid_spec=${uuid_spec//\"/}
+		 if [ "$uuid_spec" ]; then
+		     printf "%-44s %s\n" "$uuid_spec" "$rest"
+		 else
+		     printf "%-44s %s\n" "$fs_spec" "$rest"
+		 fi
+		 ;;
+	\#*)     printf "%s\n" "$fs_spec $rest" ;;
+	*)       printf "%-44s %s\n" "$fs_spec" "$rest" ;;
+    esac
+done
+
+################################################################# End. #
+
+}
+
+update_fstab(){
+echo "updating fstab"	
+
+if [ ! -f /etc/fstab.orig ]; then
+	cp /etc/fstab /etc/fstab.orig
+fi
+	
+	UUIDify > /tmp/dummy
+	mv /tmp/dummy /etc/fstab	
+}
+
+generate_grub_cfg(){
+echo "Creating /boot/grub/grub.cfg"	
+cat << EOF > /boot/grub/grub.cfg
+# This grub.cfg is part of a portable Slint.
+# Do NOT remove or modify the line above, as it indicates to the script
+# update-kernel that it should install a new initrd but run the script
+# update-portable instead of update-grub after a kernel upgrade.
+
+set menu_color_normal=white/black
+set menu_color_highlight=white/blue
+
+terminal_output console
+set timeout=10
+play 480 262 1 330 1 392 1 523 1
+EOF
+(cd /boot
+for KERNEL in `ls vmlinuz-*-*`; do
+
+	if echo $KERNEL | grep huge ; then
+		INITRD=initrd-huge-${kv}.gz
+	else
+		INITRD=initrd-generic-${kv}.gz
+	fi 
+	
+echo "
+menuentry 'Boot $SLACKELVERSION kernel ${KERNEL}' {
+	echo "Starting $SLACKELVERSION kernel ${KERNEL}.  Please wait..."
+	insmod part_gpt
+	insmod part_msdos
+	insmod btrfs
+	insmod f2fs
+	insmod ext2
+	insmod jfs
+	insmod reiserfs
+	insmod xfs
+	insmod all_video
+	search --fs-uuid --set=root $ROOTUUID
+	linux /boot/${KERNEL} root=UUID=$ROOTUUID vga=normal ro
+	initrd /boot/$INITRD
+}
+" >> /boot/grub/grub.cfg
+done
+)
+
+sed -i "/GRUB_DISABLE_OS_PROBER/s/.*/GRUB_DISABLE_OS_PROBER=true/" /etc/default/grub
 }
 
 init
 checkoptions $@
 execute_script
+update_fstab
+generate_grub_cfg
+echo "All jobs done."
