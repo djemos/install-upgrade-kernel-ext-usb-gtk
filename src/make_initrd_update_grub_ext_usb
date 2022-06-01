@@ -143,27 +143,61 @@ fi
 generate_grub_cfg(){
 echo "Creating /boot/grub/grub.cfg"	
 cat << EOF > /boot/grub/grub.cfg
-# This grub.cfg is part of a portable Slint.
-# Do NOT remove or modify the line above, as it indicates to the script
-# update-kernel that it should install a new initrd but run the script
-# update-portable instead of update-grub after a kernel upgrade.
+#set menu_color_normal=white/black
+#set menu_color_highlight=white/blue
 
+#terminal_output console
+set timeout=10
+#play 480 262 1 330 1 392 1 523 1
+### BEGIN background setup ###
+function load_video {
+  if [ x = xy ]; then
+    insmod all_video
+  else
+    insmod efi_gop
+    insmod efi_uga
+    insmod ieee1275_fb
+    insmod vbe
+    insmod vga
+    insmod video_bochs
+    insmod video_cirrus
+  fi
+}
 set menu_color_normal=white/black
 set menu_color_highlight=white/blue
 
-terminal_output console
-set timeout=10
-play 480 262 1 330 1 392 1 523 1
+insmod part_gpt
+insmod ext2
+search --no-floppy --fs-uuid --set=root $ROOTUUID
+
+if loadfont /boot/grub/fonts/unicode.pf2 ; then
+  set gfxmode=auto
+  load_video
+  insmod gfxterm
+  set locale_dir=/boot/grub/locale
+  set lang=en_US
+  insmod gettext
+fi
+
+terminal_output gfxterm
+insmod part_gpt
+insmod ext2
+
+search --no-floppy --fs-uuid --set=root $ROOTUUID
+insmod png
+background_image -m stretch /boot/grub/slackel.png
 EOF
 (cd /boot
 for KERNEL in `ls vmlinuz-*-*`; do
 
 	if echo $KERNEL | grep huge ; then
-		INITRD=initrd-huge-${kv}.gz
+		kvv=`echo $KERNEL | cut -f2 -d'>' | sed s/^[^0-9]*//`
+		INITRD=initrd-huge-${kvv}.gz
 	else
-		INITRD=initrd-generic-${kv}.gz
-	fi	
-
+		kvv=`echo $KERNEL | cut -f2 -d'>' | sed s/^[^0-9]*//`
+		INITRD=initrd-generic-${kvv}.gz
+	fi 
+	
 echo "
 menuentry 'Boot $SLACKELVERSION kernel ${KERNEL}' {
 	echo "Starting $SLACKELVERSION kernel ${KERNEL}.  Please wait..."
@@ -177,7 +211,7 @@ menuentry 'Boot $SLACKELVERSION kernel ${KERNEL}' {
 	insmod xfs
 	insmod all_video
 	search --fs-uuid --set=root $ROOTUUID
-	linux /boot/${KERNEL} root=UUID=$ROOTUUID vga=normal ro
+	linux /boot/${KERNEL} root=UUID=$ROOTUUID ro
 	initrd /boot/$INITRD
 }
 " >> /boot/grub/grub.cfg
