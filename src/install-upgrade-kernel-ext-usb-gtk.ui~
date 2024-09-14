@@ -614,7 +614,7 @@ Use it only for installations on external ssd or usb stick</property>
     <property name="type-hint">dialog</property>
     <property name="transient-for">mainwindow</property>
     <property name="program-name">install-upgrade-kernel-ext-usb</property>
-    <property name="copyright">Copyright © 2022 - 2024  Dimitris Tzemos</property>
+    <property name="copyright">Copyright © 2022  Dimitris Tzemos</property>
     <property name="license">         GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -1290,7 +1290,7 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 &lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.
 </property>
-    <property name="authors">Copyright © 2022 - 2024  Dimitris Tzemos</property>
+    <property name="authors">Copyright © 2022  Dimitris Tzemos</property>
     <property name="translator-credits" translatable="yes">translator-credits</property>
     <property name="logo-icon-name">install-upgrade-kernel-ext-usb-gtk</property>
     <signal name="delete-event" handler="gtk_widget_hide" swapped="no"/>

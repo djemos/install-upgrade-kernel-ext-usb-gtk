@@ -7,5 +7,5 @@ Name[el]=Εγκατάσταση-ενημέρωση πυρήνα σε εξωτε�
 
 Categories=System
 Exec=gksu /usr/sbin/install-upgrade-kernel-ext-usb-gtk
-Icon=install-upgrade-kernel-gtk
+Icon=install-upgrade-kernel-ext-usb-gtk
 NotShowIn=KDE
