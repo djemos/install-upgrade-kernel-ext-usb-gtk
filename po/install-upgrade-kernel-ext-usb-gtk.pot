@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 13:15+0300\n"
+"POT-Creation-Date: 2024-10-07 21:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,139 +18,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/install-upgrade-kernel-ext-usb-gtk.ui:42
-msgid "btrfs"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:45
-msgid "ext2"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:48
-msgid "ext3"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:51
-msgid "ext4"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:54
-msgid "jfs"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:57
-msgid "reiserfs"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:60
-msgid "xfs"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:71
 msgid "5"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:74
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:45
 msgid "10"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:77
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:48
 msgid "15"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:80
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:51
 msgid "20"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:83
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:54
 msgid "25"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:86
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:57
 msgid "30"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:92
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:612
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:63
+msgid "Install/Upgrade generic kernel to external SSD disk or USB stick"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:81
+msgid "_File"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:95
+msgid "Quit"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:111
+msgid "_Help"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:119
+msgid "About"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:201
+msgid ""
+"Install/Upgrade generic kernel to external SSD disk or USB stick.\n"
+"\n"
+"Do not use this program for installations to internal SSD disk.\n"
+"Your system will not boot after reboot."
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:253
+msgid "generic_kernel"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:268
+msgid "install_generic"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:283
+msgid "upgrade_generic"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:355
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:357
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:371
+msgid "Time for usb to connect to initrd in secs:"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:440
+msgid "Execute"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:456
+msgid "Stop"
+msgstr ""
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:555
 #: src/install-upgrade-kernel-ext-usb-gtk.desktop.in.h:1
 msgid "install-upgrade-kernel-ext-usb"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:110
-msgid "_File"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:124
-msgid "Quit"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:140
-msgid "_Help"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:148
-msgid "About"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:230
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:562
 msgid ""
-"Install/Upgrade generic kernel\n"
-"Use it only for installations on external ssd or usb stick"
+"Do not use this program for installations to internal SSD disk. Your system "
+"will not boot after reboot.\n"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:280
-msgid "generic_kernel"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:294
-msgid "install_generic"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:309
-msgid "upgrade_generic"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:375
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:391
-msgid "Choose the filesystem type of running system."
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:377
-msgid "Filesystem Type:"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:412
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:414
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:428
-msgid "Time for usb to connect to initrd in secs:"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:497
-msgid "Execute"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:513
-msgid "Stop"
-msgstr ""
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1294
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1240
 msgid "translator-credits"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1324
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1270
 msgid "error!"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1342
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1423
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1288
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1369
 msgid "OK"
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1385
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1331
 msgid "Error encountered."
 msgstr ""
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1406
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1465
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1352
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1411
 msgid "Operation completed."
 msgstr ""
 

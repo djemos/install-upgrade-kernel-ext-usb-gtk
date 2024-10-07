@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: install-upgrade-kernel-ext-usb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 13:09+0300\n"
-"PO-Revision-Date: 2022-04-26 20:38+0300\n"
+"POT-Creation-Date: 2024-10-07 21:55+0300\n"
+"PO-Revision-Date: 2024-10-07 21:57+0300\n"
 "Last-Translator: Dimitris Tzemos <dijemos@gmail.com>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
@@ -16,157 +16,158 @@ msgstr ""
 "X-Crowdin-Language: pt-PT\n"
 "X-Crowdin-File: install-upgrade-kernel-ext-usb-gtk.pot\n"
 "X-Crowdin-File-ID: 12\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: src/install-upgrade-kernel-ext-usb-gtk.ui:42
-msgid "btrfs"
-msgstr "btrfs"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:45
-msgid "ext2"
-msgstr "ext2"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:48
-msgid "ext3"
-msgstr "ext3"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:51
-msgid "ext4"
-msgstr "ext4"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:54
-msgid "jfs"
-msgstr "jfs"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:57
-msgid "reiserfs"
-msgstr "reiserfs"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:60
-msgid "xfs"
-msgstr "xfs"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:71
 msgid "5"
 msgstr "5"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:74
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:45
 msgid "10"
 msgstr "10"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:77
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:48
 msgid "15"
 msgstr "15"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:80
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:51
 msgid "20"
 msgstr "20"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:83
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:54
 msgid "25"
 msgstr "25"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:86
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:57
 msgid "30"
 msgstr "30"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:92
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:612
-#: src/install-upgrade-kernel-ext-usb-gtk.desktop.in.h:1
-msgid "install-upgrade-kernel-ext-usb"
-msgstr "install-upgrade-kernel-ext-usb"
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:63
+msgid "Install/Upgrade generic kernel to external SSD disk or USB stick"
+msgstr "Instalar/atualizar o kernel generic em SSD externo ou pen USB"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:110
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:81
 msgid "_File"
 msgstr "_Ficheiro"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:124
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:95
 msgid "Quit"
 msgstr "Desistir"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:140
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:111
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:148
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:119
 msgid "About"
 msgstr "Acerca"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:230
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:201
 msgid ""
-"Install/Upgrade generic kernel\n"
-"Use it only for installations on external ssd or usb stick"
+"Install/Upgrade generic kernel to external SSD disk or USB stick.\n"
+"\n"
+"Do not use this program for installations to internal SSD disk.\n"
+"Your system will not boot after reboot."
 msgstr ""
-"Instalar/atualizar o kernel generic\n"
-"Utilize-o apenas para instalações em ssd externo ou pen usb"
+"Instalar/atualizar o kernel genericem SSD externo ou pen USB\n"
+"\n"
+"Não executar este programa para instalação em disco SSD interno.\n"
+"O sistema não arranca após reiniciar."
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:280
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:253
 msgid "generic_kernel"
 msgstr "generic_kernel"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:294
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:268
 msgid "install_generic"
 msgstr "install_generic"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:309
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:283
 msgid "upgrade_generic"
 msgstr "upgrade_generic"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:375
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:391
-msgid "Choose the filesystem type of running system."
-msgstr "Escolha o tipo de sistema de ficheiros do sistema em execução."
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:377
-msgid "Filesystem Type:"
-msgstr "Tipo de sistema de ficheiros:"
-
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:412
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:414
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:428
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:355
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:357
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:371
 msgid "Time for usb to connect to initrd in secs:"
 msgstr "Tempo para o usb se ligar ao initrd em segs:"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:497
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:440
 msgid "Execute"
 msgstr "Executar"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:513
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:456
 msgid "Stop"
 msgstr "Pare"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1294
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:555
+#: src/install-upgrade-kernel-ext-usb-gtk.desktop.in.h:1
+msgid "install-upgrade-kernel-ext-usb"
+msgstr "Instalar-atualizar o kernel generic em SSD externo ou pen USB"
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:562
+msgid ""
+"Do not use this program for installations to internal SSD disk. Your system "
+"will not boot after reboot.\n"
+msgstr ""
+"Não executar este programa para instalação em disco SSD interno. O sistema "
+"não arranca após reiniciar.\n"
+
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1240
 msgid "translator-credits"
 msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1324
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1270
 msgid "error!"
 msgstr "Erro!"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1342
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1423
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1288
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1369
 msgid "OK"
 msgstr "OK"
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1385
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1331
 msgid "Error encountered."
 msgstr "Erro encontrado."
 
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1406
-#: src/install-upgrade-kernel-ext-usb-gtk.ui:1465
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1352
+#: src/install-upgrade-kernel-ext-usb-gtk.ui:1411
 msgid "Operation completed."
 msgstr "Operação concluída."
 
 #: src/install-upgrade-kernel-ext-usb-gtk-kde.desktop.in.h:1
 msgid "install-upgrade-kernel-ext-usb-gtk"
-msgstr "install-upgrade-kernel-ext-usb-gtk"
+msgstr "instalar-atualizar o kernel generic em SSD externo ou pen USB"
 
-#~ msgid ""
-#~ "Install/Upgrade huge kernel\n"
-#~ "Use it only for installations on external ssd or usb stick"
-#~ msgstr ""
-#~ "Instalar/atualizar o kernel huge\n"
-#~ "Utilize-o apenas para instalações em ssd externo ou pen usb"
+#~ msgid "Use it only for installations on external ssd or usb stick\n"
+#~ msgstr "Utilize-o apenas para instalações em ssd externo ou pen usb\n"
+
+#~ msgid "btrfs"
+#~ msgstr "btrfs"
+
+#~ msgid "ext2"
+#~ msgstr "ext2"
+
+#~ msgid "ext3"
+#~ msgstr "ext3"
+
+#~ msgid "ext4"
+#~ msgstr "ext4"
+
+#~ msgid "jfs"
+#~ msgstr "jfs"
+
+#~ msgid "reiserfs"
+#~ msgstr "reiserfs"
+
+#~ msgid "xfs"
+#~ msgstr "xfs"
+
+#~ msgid "Choose the filesystem type of running system."
+#~ msgstr "Escolha o tipo de sistema de ficheiros do sistema em execução."
+
+#~ msgid "Filesystem Type:"
+#~ msgstr "Tipo de sistema de ficheiros:"
 
 #~ msgid "huge_kernel"
 #~ msgstr "huge_kernel"

@@ -32,35 +32,6 @@
     <property name="can-focus">False</property>
     <property name="icon-name">dialog-ok</property>
   </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name Type -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">btrfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">ext2</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">ext3</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">ext4</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">jfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">reiserfs</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">xfs</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="liststore2">
     <columns>
       <!-- column-name secs -->
@@ -89,7 +60,7 @@
   </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">install-upgrade-kernel-ext-usb</property>
+    <property name="title" translatable="yes">Install/Upgrade generic kernel to external SSD disk or USB stick</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <signal name="delete-event" handler="on_exitp" swapped="no"/>
@@ -227,8 +198,10 @@
                   <object class="GtkLabel" id="label2">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Install/Upgrade generic kernel
-Use it only for installations on external ssd or usb stick</property>
+                    <property name="label" translatable="yes">Install/Upgrade generic kernel to external SSD disk or USB stick.
+
+Do not use this program for installations to internal SSD disk.
+Your system will not boot after reboot.</property>
                     <property name="justify">center</property>
                   </object>
                   <packing>
@@ -281,6 +254,7 @@ Use it only for installations on external ssd or usb stick</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">False</property>
+                    <property name="active">True</property>
                     <property name="draw-indicator">True</property>
                   </object>
                   <packing>
@@ -369,41 +343,10 @@ Use it only for installations on external ssd or usb stick</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label3">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="tooltip-text" translatable="yes">Choose the filesystem type of running system.</property>
-                    <property name="xpad">2</property>
-                    <property name="label" translatable="yes">Filesystem Type:</property>
-                    <property name="xalign">1</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">False</property>
-                    <property name="padding">2</property>
-                    <property name="position">1</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="filesystem">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="tooltip-text" translatable="yes">Choose the filesystem type of running system.</property>
-                    <property name="model">liststore1</property>
-                    <property name="active">3</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
-                      <attributes>
-                        <attribute name="text">0</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">2</property>
-                    <property name="position">2</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label4">
@@ -613,8 +556,11 @@ Use it only for installations on external ssd or usb stick</property>
     <property name="window-position">center-on-parent</property>
     <property name="type-hint">dialog</property>
     <property name="transient-for">mainwindow</property>
-    <property name="program-name">install-upgrade-kernel-ext-usb</property>
-    <property name="copyright">Copyright © 2022 - 2024  Dimitris Tzemos</property>
+    <property name="program-name">Install/Upgrade generic kernel to external SSD disk or USB stick</property>
+    <property name="copyright">Copyright © 2022 - 2024  Dimitris Tzemos
+</property>
+    <property name="comments" translatable="yes">Do not use this program for installations to internal SSD disk. Your system will not boot after reboot.
+</property>
     <property name="license">         GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

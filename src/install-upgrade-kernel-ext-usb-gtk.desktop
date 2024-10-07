@@ -2,8 +2,8 @@
 Encoding=UTF-8
 Type=Application
 
-Name=install-upgrade-kernel-ext-usb-gtk
-Name[el]=Εγκατάσταση-ενημέρωση πυρήνα σε εξωτερικό δίσκο ή usb
+Name=Install-Upgrade generic kernel to external SSD disk or USB stick
+Name[el]=Εγκατάσταση-ενημέρωση γενικού πυρήνα σε εξωτερικό SSD δίσκο ή USB stick
 
 Categories=System
 Exec=gksu /usr/sbin/install-upgrade-kernel-ext-usb-gtk
