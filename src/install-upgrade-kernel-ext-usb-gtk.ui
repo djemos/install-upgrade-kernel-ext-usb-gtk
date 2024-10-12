@@ -1395,7 +1395,7 @@ Public License instead of this License.  But first, please read
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="pixel-size">48</property>
-                <property name="icon-name">dialog-info</property>
+                <property name="icon-name">dialog-information</property>
               </object>
               <packing>
                 <property name="expand">False</property>
